@@ -1,0 +1,13 @@
+int maxSubArray(int* nums, int numsSize) {
+  int i,n=numsSize; 
+  int maxSum= INT_MIN;
+  int sum=0;
+  for(i=0;i<n;i++){
+    sum =sum+nums[i];
+     maxSum=fmax(maxSum,sum);
+     if(sum<0){
+        sum=0;
+     }
+}
+return maxSum;
+}
