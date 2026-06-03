@@ -1,0 +1,31 @@
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* sortedSquares(int* nums, int numsSize, int* returnSize) {
+    *returnSize = numsSize;
+    int *result = (int *)malloc(numsSize * sizeof(int));
+    int start = 0;
+    int end = numsSize - 1;
+    int index = numsSize - 1;
+
+    while (start <= end)
+    {
+        int leftSquare = nums[start] * nums[start];
+        int rightSquare = nums[end] * nums[end];
+
+        if (leftSquare > rightSquare)
+        {
+            result[index] = leftSquare;
+            start++;
+        }
+        else
+        {
+            result[index] = rightSquare;
+            end--;
+        }
+
+        index--;
+    }
+
+    return result;
+}
