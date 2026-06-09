@@ -1,0 +1,33 @@
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* findAnagrams(char *s, char *p, int *returnSize) {
+    int n = strlen(s);
+    int m = strlen(p);
+
+    int *result = (int *)malloc(sizeof(int) * n);
+    *returnSize = 0;
+    if (m > n) {
+        return result;
+    }
+    for (int i = 0; i <= n - m; i++) {
+        int countP[26] = {0};
+        int countS[26] = {0};
+        for (int j = 0; j < m; j++) {
+            countP[p[j] - 'a']++;
+            countS[s[i + j] - 'a']++;
+        }
+        int same = 1;
+        for (int k = 0; k < 26; k++) {
+            if (countP[k] != countS[k]) {
+                same = 0;
+                break;
+            }
+        }
+        if (same) {
+            result[*returnSize] = i;
+            (*returnSize)++;
+        }
+    }
+    return result;
+}
