@@ -1,0 +1,55 @@
+char* decodeString(char* s) {
+    int n = strlen(s);
+
+    int countStack[100];
+    char* stringStack[100];
+    int top = -1;
+
+    char* current = (char*)malloc(100001);
+    current[0] = '\0';
+
+    int num = 0;
+
+    for (int i = 0; i < n; i++) {
+
+        if (isdigit(s[i])) {
+            num = num * 10 + (s[i] - '0');
+        }
+
+        else if (s[i] == '[') {
+            top++;
+            countStack[top] = num;
+
+            stringStack[top] = (char*)malloc(100001);
+            strcpy(stringStack[top], current);
+
+            current[0] = '\0';
+            num = 0;
+        }
+
+        else if (s[i] == ']') {
+            int repeat = countStack[top];
+
+            char* temp = (char*)malloc(100001);
+            strcpy(temp, stringStack[top]);
+
+            for (int j = 0; j < repeat; j++) {
+                strcat(temp, current);
+            }
+
+            strcpy(current, temp);
+
+            free(temp);
+            free(stringStack[top]);
+            top--;
+        }
+
+        else {
+            int len = strlen(current);
+            current[len] = s[i];
+            current[len + 1] = '\0';
+        }
+    }
+
+    return current;
+}
