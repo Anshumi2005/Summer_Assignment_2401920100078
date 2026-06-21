@@ -1,0 +1,25 @@
+int compress(char* chars, int charsSize) {
+    int write = 0;
+    int index = 0
+    while (index < charsSize) {
+        char current = chars[index];
+        int count = 0;
+        while (index < charsSize && chars[index] == current) {
+            count++;
+            index++
+        }
+        chars[write++] = current;
+        if (count > 1) {
+            char digits[12];
+            int len = 0;
+            while (count > 0) {
+                digits[len++] = (count % 10) + '0';
+                count /= 10;
+            }
+            for (int i = len - 1; i >= 0; i--) {
+                chars[write++] = digits[i];
+            }
+        }
+    }
+    return write
+}
