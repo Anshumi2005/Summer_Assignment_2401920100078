@@ -1,0 +1,36 @@
+
+typedef struct {
+    int arr[10000];
+    int size;
+} RecentCounter;
+
+
+RecentCounter* recentCounterCreate() {
+    RecentCounter* obj = (RecentCounter*)malloc(sizeof(RecentCounter));
+    obj->size = 0;
+    return obj; 
+}
+
+int recentCounterPing(RecentCounter* obj, int t)
+{
+    obj->arr[obj->size] = t;
+    obj->size++;
+
+    int count = 0;
+
+    for(int i = 0; i < obj->size; i++)
+    {
+        if(obj->arr[i] >= t - 3000 && obj->arr[i] <= t)
+        {
+            count++;
+        }
+    }
+
+    return count;  
+}
+
+void recentCounterFree(RecentCounter* obj) {
+   free(obj);
+}  
+
+
