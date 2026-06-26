@@ -6,24 +6,24 @@
  *     struct TreeNode *right;
  * };
  */
-
-struct TreeNode* lowestCommonAncestor(struct TreeNode* root, struct TreeNode* p, struct TreeNode* q) {
+struct TreeNode* searchBST(struct TreeNode* root, int val) {
+ 
     while (root != NULL)
     {
-        if (p->val < root->val && q->val < root->val)
+        if (root->val == val)
+        {
+            return root;
+        }
+
+        if (val < root->val)
         {
             root = root->left;
         }
-        else if (p->val > root->val && q->val > root->val)
-        {
-            root = root->right;
-        }
         else
         {
-            return root;
+            root = root->right;
         }
     }
 
     return NULL;
-
 }
